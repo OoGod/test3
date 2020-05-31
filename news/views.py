@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
@@ -9,6 +9,10 @@ from django import forms
 from .models import Article, Comment
 
 # Create your views here.
+def index(request):
+    TIMES = 2
+    return HttpResponse("Hello! " * TIMES)
+
 def year_archive(request, year):
     a_list = Article.objects.filter(pub_date__year=year)
     context = {'year':year,'article_list':a_list}
