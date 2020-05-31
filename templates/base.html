@@ -1,0 +1,18 @@
+{% load static %}
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<style type="text/css">
+	tr.evenrow{
+		background: #FFFFFF;
+	}
+	tr.oddrow{
+		background: #DDDDDD;
+	}
+</style>
+</head>
+<body>
+	<img src="{% static 'images/sitelogo.png' %}" alt="Logo">
+	{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} {{ article.headline }}{% endblock %}
+<style type="text/css">
+	tr.evenrow{
+		background: #FFFFFF;
+	}
+	tr.oddrow{
+		background: #DDDDDD;
+	}
+</style>
+{% block content %}
+
+	<h1>{{ article.headline }}</h1>
+	<p>By {{ article.reporter.full_name }}</p>
+	<p>Published {{ article.pub_date|date:"F j, Y" }}</p>
+	{% if comment_list|length > 1 %}
+		<h3>Comments</h3>
+	{% elif comment_list|length > 0 %}
+		<h3>Comment</h3>	
+	<!-- {% } -->
+	{% endif %}
+	<table>
+	{% for comment in comment_list %}
+		<tr class="{% cycle 'oddrow' 'evenrow' %}">
+			<td>{{ comment.text }}</td>
+			<td>{{ comment.timestamp }}</td>
+		</tr>
+		<!-- <hr> -->
+	{% endfor %}
+	</table>
+	<form action="{% url 'news:detail' year month article.pk %}" method="post">
+		{% csrf_token %}
+		<table>{{ form }}</table>
+		<input type="submit" name="submit" />
+	</form>
+{% endblock %}
