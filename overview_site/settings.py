@@ -129,3 +129,6 @@ STATICFILES_DIRS = [
 ]
 
 django_heroku.settings(locals())
+
+import dj_datebase_url
+DATABASES['default']=dj_datebase_url.config(conn_max_age=600,ssl_require=True)
